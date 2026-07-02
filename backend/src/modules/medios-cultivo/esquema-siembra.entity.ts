@@ -63,6 +63,8 @@ export class EsquemaSiembra {
     opciones?: string[];
     colores?: { valor: string; label: string; color: string; germen: string }[];
     obligatorio?: boolean;
+    /** Si true, el campo aparece en el informe digital/PDF. Si false, es solo para uso interno del laboratorio. */
+    apareceEnInforme?: boolean;
   }[];
 
   @Column({ nullable: true, length: 300 })

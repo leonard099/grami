@@ -38,16 +38,16 @@ const esquemas = [
     instrucciones: 'Sembrar por agotamiento. Incubar 37°C 24-48h.',
     diasResolucionEsperados: 2,
     camposCultivoPrimario: [
-      { clave: 'recuento_ufc', label: 'Recuento de colonias', tipo: 'selector', opciones: RECUENTO_UFC, obligatorio: true },
-      { clave: 'color_cps', label: 'Color en CPS', tipo: 'color_selector', colores: COLORES_CPS, obligatorio: false },
-      { clave: 'leucocitos', label: 'Leucocitos', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'hematies', label: 'Hematíes', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'celulas_epiteliales', label: 'Células epiteliales', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'piocitos', label: 'Piocitos', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'levaduras', label: 'Levaduras', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'bacteriuria', label: 'Bacteriuria', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'cristales', label: 'Cristales', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
-      { clave: 'observaciones_directo', label: 'Observaciones', tipo: 'texto', obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'recuento_ufc', label: 'Recuento de colonias', tipo: 'selector', opciones: RECUENTO_UFC, obligatorio: true, apareceEnInforme: true },
+      { clave: 'color_cps', label: 'Color en CPS', tipo: 'color_selector', colores: COLORES_CPS, obligatorio: false, apareceEnInforme: false },
+      { clave: 'leucocitos', label: 'Leucocitos', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'hematies', label: 'Hematíes', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'celulas_epiteliales', label: 'Células epiteliales', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'piocitos', label: 'Piocitos', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'levaduras', label: 'Levaduras', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'bacteriuria', label: 'Bacteriuria', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'cristales', label: 'Cristales', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo', apareceEnInforme: true },
+      { clave: 'observaciones_directo', label: 'Observaciones', tipo: 'texto', obligatorio: false, grupo: 'Examen directo', apareceEnInforme: false },
     ],
   },
   {
@@ -72,8 +72,8 @@ const esquemas = [
     instrucciones: 'Incubar 37°C 24-48h. Subcultivar caldo a las 48h.',
     diasResolucionEsperados: 3,
     camposCultivoPrimario: [
-      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true },
-      { clave: 'fresco', label: 'Examen en fresco', tipo: 'texto', obligatorio: false },
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true, apareceEnInforme: false },
+      { clave: 'fresco', label: 'Examen en fresco', tipo: 'texto', obligatorio: false, apareceEnInforme: false },
     ],
   },
   {
@@ -87,9 +87,9 @@ const esquemas = [
     instrucciones: 'Incubar 37°C 24h. Subcultivar selenito.',
     diasResolucionEsperados: 3,
     camposCultivoPrimario: [
-      { clave: 'consistencia', label: 'Consistencia de materia fecal', tipo: 'selector', opciones: ['Formada', 'Blanda', 'Pastosa', 'Líquida'], obligatorio: false },
-      { clave: 'leucocitos', label: 'Leucocitos en fresco', tipo: 'si_no', obligatorio: false },
-      { clave: 'parasitologico', label: 'Observación parasitológica', tipo: 'texto', obligatorio: false },
+      { clave: 'consistencia', label: 'Consistencia de materia fecal', tipo: 'selector', opciones: ['Formada', 'Blanda', 'Pastosa', 'Líquida'], obligatorio: false, apareceEnInforme: true },
+      { clave: 'leucocitos', label: 'Leucocitos en fresco', tipo: 'si_no', obligatorio: false, apareceEnInforme: true },
+      { clave: 'parasitologico', label: 'Observación parasitológica', tipo: 'texto', obligatorio: false, apareceEnInforme: true },
     ],
   },
   {
@@ -102,9 +102,9 @@ const esquemas = [
     instrucciones: 'Procesar con urgencia. Examen directo con gram obligatorio. Incubar 37°C.',
     diasResolucionEsperados: 5,
     camposCultivoPrimario: [
-      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true },
-      { clave: 'fresco_hongos', label: 'Examen en fresco (hongos)', tipo: 'texto', obligatorio: false },
-      { clave: 'celulas', label: 'Recuento de células', tipo: 'texto', obligatorio: false },
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true, apareceEnInforme: true },
+      { clave: 'fresco_hongos', label: 'Examen en fresco (hongos)', tipo: 'texto', obligatorio: false, apareceEnInforme: true },
+      { clave: 'celulas', label: 'Recuento de células', tipo: 'texto', obligatorio: false, apareceEnInforme: true },
     ],
   },
   {
@@ -135,9 +135,9 @@ const esquemas = [
     instrucciones: 'Incubar a 28°C y 37°C. Lectura semanal hasta los 30 días.',
     diasResolucionEsperados: 30,
     camposCultivoPrimario: [
-      { clave: 'fresco_koh', label: 'Fresco con KOH', tipo: 'texto', obligatorio: false },
-      { clave: 'calcofluor', label: 'Calcoflúor', tipo: 'texto', obligatorio: false },
-      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: false },
+      { clave: 'fresco_koh', label: 'Fresco con KOH', tipo: 'texto', obligatorio: false, apareceEnInforme: false },
+      { clave: 'calcofluor', label: 'Calcoflúor', tipo: 'texto', obligatorio: false, apareceEnInforme: false },
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: false, apareceEnInforme: false },
     ],
   },
   {

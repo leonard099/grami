@@ -54,10 +54,42 @@ export interface SeguimientoAislamiento {
   actualizadoEn: string;
 }
 
+export type TipoCampo =
+  | 'texto'
+  | 'si_no'
+  | 'selector'
+  | 'rango'
+  | 'cruces'
+  | 'numerico'
+  | 'color_selector'
+  | 'checklist';
+
+export interface ColorOpcion {
+  valor: string;
+  label: string;
+  color: string;
+  germen: string;
+}
+
+export interface CampoCultivoPrimario {
+  clave: string;
+  label: string;
+  tipo: TipoCampo;
+  grupo?: string;
+  opciones?: string[];
+  colores?: ColorOpcion[];
+  obligatorio?: boolean;
+  apareceEnInforme?: boolean;
+}
+
 export interface EsquemaSiembra {
   id: number;
   tipoEstudio: string;
   nombreDisplay: string;
   medios: MedioSembrado[];
   instrucciones?: string;
+  diasResolucionEsperados: number;
+  requiereMaterial: boolean;
+  camposCultivoPrimario: CampoCultivoPrimario[];
+  activo: boolean;
 }
