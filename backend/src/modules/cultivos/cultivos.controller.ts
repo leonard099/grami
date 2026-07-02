@@ -1,0 +1,33 @@
+import { Controller, Get, Post, Put, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
+import { CultivosService } from './cultivos.service';
+import { CreateCultivoDto } from './dto/create-cultivo.dto';
+
+@Controller('cultivos')
+export class CultivosController {
+  constructor(private readonly svc: CultivosService) {}
+
+  @Get()
+  findAll(@Query('pacienteId') pacienteId?: string) {
+    return this.svc.findAll(pacienteId ? parseInt(pacienteId) : undefined);
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.svc.findOne(id);
+  }
+
+  @Post()
+  create(@Body() dto: CreateCultivoDto) {
+    return this.svc.create(dto);
+  }
+
+  @Put(':id/cerrar')
+  cerrar(@Param('id', ParseIntPipe) id: number) {
+    return this.svc.cerrar(id);
+  }
+
+  @Put(':id/reabrir')
+  reabrir(@Param('id', ParseIntPipe) id: number, @Body('motivo') motivo: string) {
+    return this.svc.reabrir(id, motivo);
+  }
+}

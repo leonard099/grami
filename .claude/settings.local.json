@@ -11,7 +11,11 @@
       "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\leona\\\\OneDrive\\\\Escritorio\\\\Grami\\\\docs\")",
       "PowerShell(Copy-Item \"C:\\\\Users\\\\leona\\\\Downloads\\\\grami_historias_de_usuario.md\" \"C:\\\\Users\\\\leona\\\\OneDrive\\\\Escritorio\\\\Grami\\\\docs\\\\historias-de-usuario.md\")",
       "mcp__visualize__read_me",
-      "mcp__visualize__show_widget"
+      "mcp__visualize__show_widget",
+      "PowerShell(New-Item -ItemType Directory -Path \"$env:USERPROFILE\\\\Desktop\\\\pececita\" -Force)",
+      "PowerShell(Write-Output \"OneDrive Desktop:\"; Test-Path \"C:\\\\Users\\\\leona\\\\OneDrive\\\\Escritorio\\\\pececita\"; Write-Output \"Local Desktop:\"; Test-Path \"C:\\\\Users\\\\leona\\\\Desktop\\\\pececita\"; Write-Output \"---\"; [Environment]::GetFolderPath\\(\"Desktop\"\\))",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('scripts',{}\\)\\)\")",
+      "PowerShell(node -e \"const d=require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\); JSON.parse\\(d\\); console.log\\('JSON v�lido'\\)\" 2>&1)"
     ]
   }
 }

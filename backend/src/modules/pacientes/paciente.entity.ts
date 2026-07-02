@@ -6,11 +6,9 @@ export class Paciente {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100 })
+  /** Nombre completo: "Apellido, Nombre" */
+  @Column({ length: 200 })
   nombre: string;
-
-  @Column({ length: 100 })
-  apellido: string;
 
   @Column({ length: 20, unique: true, nullable: true })
   dni: string;
