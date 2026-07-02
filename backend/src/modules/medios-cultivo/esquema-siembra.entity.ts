@@ -20,6 +20,10 @@ export class EsquemaSiembra {
   @Column({ type: 'jsonb' })
   medios: { medio: string; cantidad: string; descripcion?: string }[];
 
+  /** Si true, el formulario de ingreso muestra el campo "Material / muestra" */
+  @Column({ default: false })
+  requiereMaterial: boolean;
+
   @Column({ nullable: true, length: 300 })
   instrucciones: string;
 

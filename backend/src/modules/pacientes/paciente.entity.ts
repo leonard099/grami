@@ -27,6 +27,12 @@ export class Paciente {
   @Column({ nullable: true, length: 100 })
   nroAfiliado: string;
 
+  @Column({ nullable: true, length: 150 })
+  email: string;
+
+  @Column({ nullable: true, length: 30 })
+  telefono: string;
+
   @CreateDateColumn()
   creadoEn: Date;
 

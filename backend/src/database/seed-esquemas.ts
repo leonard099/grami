@@ -60,6 +60,24 @@ const esquemas = [
     diasResolucionEsperados: 5,
   },
   {
+    tipoEstudio: 'microbiologico-general',
+    nombreDisplay: 'Estudio microbiológico general',
+    medios: [],
+    instrucciones: 'Medios según tipo de muestra indicado.',
+    diasResolucionEsperados: 3,
+    requiereMaterial: true,
+  },
+  {
+    tipoEstudio: 'chlamydia',
+    nombreDisplay: 'Chlamydia trachomatis',
+    medios: [
+      { medio: 'Hisopado en medio de transporte', cantidad: '1 tubo' },
+    ],
+    instrucciones: 'Procesar por PCR. Indicar sitio de toma en el campo material.',
+    diasResolucionEsperados: 2,
+    requiereMaterial: true,
+  },
+  {
     tipoEstudio: 'micologico',
     nombreDisplay: 'Cultivo micológico',
     medios: [
