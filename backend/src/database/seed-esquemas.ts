@@ -15,6 +15,7 @@ const esquemas = [
       { medio: 'CPS', cantidad: '1/12 placa' },
     ],
     instrucciones: 'Sembrar por agotamiento. Incubar 37°C 24-48h.',
+    diasResolucionEsperados: 2,
   },
   {
     tipoEstudio: 'hemocultivo',
@@ -24,6 +25,7 @@ const esquemas = [
       { medio: 'Frasco anaerobio BacT/ALERT', cantidad: '1 frasco' },
     ],
     instrucciones: 'Cargar 8-10 mL por frasco. Incubar en sistema automatizado.',
+    diasResolucionEsperados: 5,
   },
   {
     tipoEstudio: 'secrecion',
@@ -34,6 +36,7 @@ const esquemas = [
       { medio: 'Caldo tioglicolato', cantidad: '1 tubo' },
     ],
     instrucciones: 'Incubar 37°C 24-48h. Subcultivar caldo a las 48h.',
+    diasResolucionEsperados: 3,
   },
   {
     tipoEstudio: 'coprocultivo',
@@ -44,6 +47,7 @@ const esquemas = [
       { medio: 'Caldo selenito', cantidad: '1 tubo' },
     ],
     instrucciones: 'Incubar 37°C 24h. Subcultivar selenito.',
+    diasResolucionEsperados: 3,
   },
   {
     tipoEstudio: 'lcrcultivo',
@@ -53,6 +57,28 @@ const esquemas = [
       { medio: 'Caldo BHI', cantidad: '1 tubo' },
     ],
     instrucciones: 'Procesar con urgencia. Examen directo con gram obligatorio. Incubar 37°C.',
+    diasResolucionEsperados: 5,
+  },
+  {
+    tipoEstudio: 'micologico',
+    nombreDisplay: 'Cultivo micológico',
+    medios: [
+      { medio: 'Agar Sabouraud', cantidad: '2 tubos' },
+      { medio: 'Agar Sabouraud + cloranfenicol', cantidad: '1 tubo' },
+    ],
+    instrucciones: 'Incubar a 28°C y 37°C. Lectura semanal hasta los 30 días.',
+    diasResolucionEsperados: 30,
+  },
+  {
+    tipoEstudio: 'anaerobios',
+    nombreDisplay: 'Cultivo de anaerobios',
+    medios: [
+      { medio: 'Agar Brucella', cantidad: '1 placa' },
+      { medio: 'Caldo tioglicolato', cantidad: '1 tubo' },
+      { medio: 'CLDE (aerobiosis control)', cantidad: '1 placa' },
+    ],
+    instrucciones: 'Procesar en cámara anaerobia. Incubar 37°C 48-72h. Subcultivar si no hay desarrollo.',
+    diasResolucionEsperados: 7,
   },
 ];
 

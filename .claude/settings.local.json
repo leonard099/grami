@@ -7,7 +7,11 @@
       "PowerShell(winget install --id GitHub.cli -e --source winget)",
       "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\GitHub CLI\"; gh auth status)",
       "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\GitHub CLI\"; gh repo create laboratorio-bacteriologia --public --description \"Sistema de gestion de bacteriologia para laboratorio de analisis clinico\" --confirm 2>&1; if \\(-not $?\\) { gh repo create laboratorio-bacteriologia --public --description \"Sistema de gestion de bacteriologia para laboratorio de analisis clinico\" })",
-      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\GitHub CLI\"; gh repo view leonard099/laboratorio-bacteriologia --json url,description)"
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\GitHub CLI\"; gh repo view leonard099/laboratorio-bacteriologia --json url,description)",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\leona\\\\OneDrive\\\\Escritorio\\\\Grami\\\\docs\")",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\leona\\\\Downloads\\\\grami_historias_de_usuario.md\" \"C:\\\\Users\\\\leona\\\\OneDrive\\\\Escritorio\\\\Grami\\\\docs\\\\historias-de-usuario.md\")",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
     ]
   }
 }

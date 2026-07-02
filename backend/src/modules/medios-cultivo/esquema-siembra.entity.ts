@@ -23,6 +23,14 @@ export class EsquemaSiembra {
   @Column({ nullable: true, length: 300 })
   instrucciones: string;
 
+  /**
+   * Días esperados para el cierre del cultivo.
+   * Dispara la alerta visual en el dashboard cuando se supera este plazo.
+   * Ej: urocultivo = 2, micológico = 30, anaerobios = 7.
+   */
+  @Column({ default: 3 })
+  diasResolucionEsperados: number;
+
   @Column({ default: true })
   activo: boolean;
 
