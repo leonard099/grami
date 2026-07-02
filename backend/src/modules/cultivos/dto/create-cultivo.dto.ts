@@ -23,4 +23,8 @@ export class CreateCultivoDto {
   @IsOptional()
   @IsString()
   servicio?: string;
+
+  @IsOptional()
+  @IsString()
+  centroDerivante?: string;
 }

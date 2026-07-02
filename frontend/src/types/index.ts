@@ -1,12 +1,13 @@
 export interface Paciente {
   id: number;
   nombre: string;
-  apellido: string;
-  dni: string;
+  dni?: string;
   fechaNacimiento?: string;
   sexo?: string;
   obraSocial?: string;
   nroAfiliado?: string;
+  email?: string;
+  telefono?: string;
 }
 
 export interface MedioSembrado {
@@ -14,17 +15,19 @@ export interface MedioSembrado {
   cantidad: string;
 }
 
-export type EstadoCultivo = 'abierto' | 'cerrado';
+export type EstadoCultivo = 'pendiente' | 'recepcionado' | 'sembrado' | 'en_lectura' | 'cerrado';
 
 export interface Cultivo {
   id: number;
   codigoBarras: string;
   paciente: Paciente;
+  pacienteId: number;
   tipoEstudio: string;
   material?: string;
   observacionesClinicas?: string;
   medicoSolicitante?: string;
   servicio?: string;
+  centroDerivante?: string;
   estado: EstadoCultivo;
   fechaApertura: string;
   fechaCierre?: string;
@@ -55,14 +58,8 @@ export interface SeguimientoAislamiento {
 }
 
 export type TipoCampo =
-  | 'texto'
-  | 'si_no'
-  | 'selector'
-  | 'rango'
-  | 'cruces'
-  | 'numerico'
-  | 'color_selector'
-  | 'checklist';
+  | 'texto' | 'si_no' | 'selector' | 'rango'
+  | 'cruces' | 'numerico' | 'color_selector' | 'checklist';
 
 export interface ColorOpcion {
   valor: string;

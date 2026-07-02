@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Param, Body, Query, ParseIntPipe } from '@nestjs/common';
 import { CultivosService } from './cultivos.service';
 import { CreateCultivoDto } from './dto/create-cultivo.dto';
+import { EstadoCultivo } from './cultivo.entity';
 
 @Controller('cultivos')
 export class CultivosController {
@@ -21,9 +22,14 @@ export class CultivosController {
     return this.svc.create(dto);
   }
 
-  @Put(':id/cerrar')
-  cerrar(@Param('id', ParseIntPipe) id: number) {
-    return this.svc.cerrar(id);
+  @Put(':id/avanzar')
+  avanzarEstado(@Param('id', ParseIntPipe) id: number) {
+    return this.svc.avanzarEstado(id);
+  }
+
+  @Put(':id/estado')
+  setEstado(@Param('id', ParseIntPipe) id: number, @Body('estado') estado: EstadoCultivo) {
+    return this.svc.setEstado(id, estado);
   }
 
   @Put(':id/reabrir')

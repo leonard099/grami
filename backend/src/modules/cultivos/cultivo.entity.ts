@@ -6,7 +6,10 @@ import { Paciente } from '../pacientes/paciente.entity';
 import { SeguimientoAislamiento } from '../seguimiento/seguimiento-aislamiento.entity';
 
 export enum EstadoCultivo {
-  ABIERTO = 'abierto',
+  PENDIENTE = 'pendiente',
+  RECEPCIONADO = 'recepcionado',
+  SEMBRADO = 'sembrado',
+  EN_LECTURA = 'en_lectura',
   CERRADO = 'cerrado',
 }
 
@@ -43,7 +46,10 @@ export class Cultivo {
   @Column({ nullable: true, length: 100 })
   servicio: string;
 
-  @Column({ type: 'enum', enum: EstadoCultivo, default: EstadoCultivo.ABIERTO })
+  @Column({ nullable: true, length: 150 })
+  centroDerivante: string;
+
+  @Column({ type: 'enum', enum: EstadoCultivo, default: EstadoCultivo.PENDIENTE })
   estado: EstadoCultivo;
 
   @Column({ nullable: true })

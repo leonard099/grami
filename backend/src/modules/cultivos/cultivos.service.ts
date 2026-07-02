@@ -5,6 +5,14 @@ import { Cultivo, EstadoCultivo } from './cultivo.entity';
 import { EsquemaSiembra } from '../medios-cultivo/esquema-siembra.entity';
 import { CreateCultivoDto } from './dto/create-cultivo.dto';
 
+const FLUJO_ESTADOS = [
+  EstadoCultivo.PENDIENTE,
+  EstadoCultivo.RECEPCIONADO,
+  EstadoCultivo.SEMBRADO,
+  EstadoCultivo.EN_LECTURA,
+  EstadoCultivo.CERRADO,
+];
+
 @Injectable()
 export class CultivosService {
   constructor(
@@ -32,10 +40,10 @@ export class CultivosService {
   }
 
   async create(dto: CreateCultivoDto): Promise<Cultivo> {
-    // Generar código de barras: tipo + timestamp
-    const codigo = `${dto.tipoEstudio.toUpperCase().slice(0, 3)}-${Date.now()}`;
+    const now = Date.now();
+    const num = String(now).slice(-4);
+    const codigo = `GR-${num.padStart(4, '0')}${Math.floor(Math.random() * 10)}`;
 
-    // Obtener medios del esquema correspondiente
     const esquema = await this.esquemaRepo.findOneBy({ tipoEstudio: dto.tipoEstudio });
     const mediosSembrados = esquema?.medios ?? [];
 
@@ -47,24 +55,28 @@ export class CultivosService {
     return this.cultivoRepo.save(cultivo);
   }
 
-  async cerrar(id: number): Promise<Cultivo> {
+  async avanzarEstado(id: number): Promise<Cultivo> {
     const c = await this.findOne(id);
-    if (c.estado === EstadoCultivo.CERRADO) {
-      throw new BadRequestException('El cultivo ya está cerrado');
-    }
-    c.estado = EstadoCultivo.CERRADO;
-    c.fechaCierre = new Date();
+    const idx = FLUJO_ESTADOS.indexOf(c.estado);
+    if (idx === FLUJO_ESTADOS.length - 1) throw new BadRequestException('El cultivo ya esta cerrado');
+    c.estado = FLUJO_ESTADOS[idx + 1];
+    if (c.estado === EstadoCultivo.CERRADO) c.fechaCierre = new Date();
+    return this.cultivoRepo.save(c);
+  }
+
+  async setEstado(id: number, estado: EstadoCultivo): Promise<Cultivo> {
+    const c = await this.findOne(id);
+    c.estado = estado;
+    if (estado === EstadoCultivo.CERRADO) c.fechaCierre = new Date();
+    else c.fechaCierre = null;
     return this.cultivoRepo.save(c);
   }
 
   async reabrir(id: number, motivo: string): Promise<Cultivo> {
     const c = await this.findOne(id);
-    if (c.estado === EstadoCultivo.ABIERTO) {
-      throw new BadRequestException('El cultivo ya está abierto');
-    }
-    c.estado = EstadoCultivo.ABIERTO;
+    if (c.estado !== EstadoCultivo.CERRADO) throw new BadRequestException('El cultivo no esta cerrado');
+    c.estado = EstadoCultivo.EN_LECTURA;
     c.fechaCierre = null;
-    // Guardamos el motivo en observaciones clínicas (extenderemos con tabla de auditoría luego)
     c.observacionesClinicas = `${c.observacionesClinicas || ''}\n[REAPERTURA] ${motivo}`.trim();
     return this.cultivoRepo.save(c);
   }

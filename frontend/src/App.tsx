@@ -1,37 +1,60 @@
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import CultivosList from './pages/CultivosList';
+import CultivosActivos from './pages/CultivosActivos';
 import CultivoDetalle from './pages/CultivoDetalle';
 import NuevoCultivo from './pages/NuevoCultivo';
-import styles from './App.module.css';
+import s from './App.module.css';
 
 export default function App() {
   return (
-    <div className={styles.layout}>
-      <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <span className={styles.logoIcon}>🧫</span>
-          <span className={styles.logoText}>Grami</span>
+    <div className={s.layout}>
+      <aside className={s.sidebar}>
+        <div className={s.logo}>
+          <span className={s.logoMark}>G</span>
+          <span className={s.logoText}>Grami</span>
         </div>
-        <nav className={styles.nav}>
-          <NavLink to="/dashboard" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
-            Dashboard
+
+        <div className={s.navGroup}>
+          <span className={s.navLabel}>Principal</span>
+          <NavLink to="/cultivos" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-flask" aria-hidden="true" /> Cultivos
           </NavLink>
-          <NavLink to="/cultivos" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
-            Cultivos
+          <NavLink to="/pacientes" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-users" aria-hidden="true" /> Pacientes
           </NavLink>
-        </nav>
-        <div className={styles.sidebarFooter}>
-          <span className={styles.version}>v0.1.0</span>
+        </div>
+
+        <div className={s.navGroup}>
+          <span className={s.navLabel}>Configuración</span>
+          <NavLink to="/tipos-estudio" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-layout-list" aria-hidden="true" /> Tipos de estudio
+          </NavLink>
+          <NavLink to="/protocolos-atb" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-pill" aria-hidden="true" /> Protocolos ATB
+          </NavLink>
+          <NavLink to="/centros" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-building-hospital" aria-hidden="true" /> Centros derivantes
+          </NavLink>
+          <NavLink to="/usuarios" className={({ isActive }) => `${s.navLink} ${isActive ? s.active : ''}`}>
+            <i className="ti ti-user-circle" aria-hidden="true" /> Usuarios
+          </NavLink>
+        </div>
+
+        <div className={s.sidebarFooter}>
+          <div className={s.userAvatar}>MB</div>
+          <div>
+            <div className={s.userName}>M. Berardi</div>
+            <div className={s.userRole}>Bioquímico</div>
+          </div>
         </div>
       </aside>
-      <main className={styles.main}>
+
+      <main className={s.main}>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/cultivos" element={<CultivosList />} />
+          <Route path="/" element={<Navigate to="/cultivos" replace />} />
+          <Route path="/cultivos" element={<CultivosActivos />} />
           <Route path="/cultivos/nuevo" element={<NuevoCultivo />} />
           <Route path="/cultivos/:id" element={<CultivoDetalle />} />
+          <Route path="*" element={<Navigate to="/cultivos" replace />} />
         </Routes>
       </main>
     </div>

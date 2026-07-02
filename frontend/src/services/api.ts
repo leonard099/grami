@@ -22,8 +22,11 @@ export const getCultivo = (id: number) =>
 export const crearCultivo = (data: object) =>
   api.post('/cultivos', data).then(r => r.data);
 
-export const cerrarCultivo = (id: number) =>
-  api.put(`/cultivos/${id}/cerrar`).then(r => r.data);
+export const avanzarEstado = (id: number) =>
+  api.put(`/cultivos/${id}/avanzar`).then(r => r.data);
+
+export const setEstado = (id: number, estado: string) =>
+  api.put(`/cultivos/${id}/estado`, { estado }).then(r => r.data);
 
 export const reabrirCultivo = (id: number, motivo: string) =>
   api.put(`/cultivos/${id}/reabrir`, { motivo }).then(r => r.data);
