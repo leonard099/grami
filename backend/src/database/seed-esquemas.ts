@@ -6,6 +6,27 @@ import 'dotenv/config';
 import { AppDataSource } from './data-source';
 import { EsquemaSiembra } from '../modules/medios-cultivo/esquema-siembra.entity';
 
+const RECUENTO_UFC = [
+  '≥ 100.000 UFC/mL',
+  '10.000 – 100.000 UFC/mL',
+  '1.000 – 10.000 UFC/mL',
+  '< 1.000 UFC/mL',
+  'Sin desarrollo',
+  'Contaminación',
+];
+
+const RANGOS_CELULAS = ['0-1', '1-3', '3-5', '5-7', '7-10', '10-20', '20-30', '> 30'];
+
+const COLORES_CPS = [
+  { valor: 'rosa', label: 'Rosa', color: '#F48FB1', germen: 'Escherichia coli' },
+  { valor: 'azul_kes', label: 'Azul (KES)', color: '#90CAF9', germen: 'Klebsiella / Enterobacter / Serratia' },
+  { valor: 'azul_entero', label: 'Azul turquesa', color: '#80DEEA', germen: 'Enterococcus spp.' },
+  { valor: 'verde', label: 'Verde', color: '#A5D6A7', germen: 'Pseudomonas aeruginosa' },
+  { valor: 'blanco', label: 'Blanco / incoloro', color: '#F5F5F5', germen: 'Levadura / Acinetobacter / Staphylococcus' },
+  { valor: 'dorado', label: 'Dorado / caramelo', color: '#FFD54F', germen: 'Staphylococcus aureus' },
+  { valor: 'amarillo', label: 'Amarillo', color: '#FFF176', germen: 'Proteus spp.' },
+];
+
 const esquemas = [
   {
     tipoEstudio: 'urocultivo',
@@ -16,6 +37,18 @@ const esquemas = [
     ],
     instrucciones: 'Sembrar por agotamiento. Incubar 37°C 24-48h.',
     diasResolucionEsperados: 2,
+    camposCultivoPrimario: [
+      { clave: 'recuento_ufc', label: 'Recuento de colonias', tipo: 'selector', opciones: RECUENTO_UFC, obligatorio: true },
+      { clave: 'color_cps', label: 'Color en CPS', tipo: 'color_selector', colores: COLORES_CPS, obligatorio: false },
+      { clave: 'leucocitos', label: 'Leucocitos', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'hematies', label: 'Hematíes', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'celulas_epiteliales', label: 'Células epiteliales', tipo: 'rango', opciones: RANGOS_CELULAS, obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'piocitos', label: 'Piocitos', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'levaduras', label: 'Levaduras', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'bacteriuria', label: 'Bacteriuria', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'cristales', label: 'Cristales', tipo: 'cruces', obligatorio: false, grupo: 'Examen directo' },
+      { clave: 'observaciones_directo', label: 'Observaciones', tipo: 'texto', obligatorio: false, grupo: 'Examen directo' },
+    ],
   },
   {
     tipoEstudio: 'hemocultivo',
@@ -26,6 +59,7 @@ const esquemas = [
     ],
     instrucciones: 'Cargar 8-10 mL por frasco. Incubar en sistema automatizado.',
     diasResolucionEsperados: 5,
+    camposCultivoPrimario: [],
   },
   {
     tipoEstudio: 'secrecion',
@@ -37,6 +71,10 @@ const esquemas = [
     ],
     instrucciones: 'Incubar 37°C 24-48h. Subcultivar caldo a las 48h.',
     diasResolucionEsperados: 3,
+    camposCultivoPrimario: [
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true },
+      { clave: 'fresco', label: 'Examen en fresco', tipo: 'texto', obligatorio: false },
+    ],
   },
   {
     tipoEstudio: 'coprocultivo',
@@ -48,6 +86,11 @@ const esquemas = [
     ],
     instrucciones: 'Incubar 37°C 24h. Subcultivar selenito.',
     diasResolucionEsperados: 3,
+    camposCultivoPrimario: [
+      { clave: 'consistencia', label: 'Consistencia de materia fecal', tipo: 'selector', opciones: ['Formada', 'Blanda', 'Pastosa', 'Líquida'], obligatorio: false },
+      { clave: 'leucocitos', label: 'Leucocitos en fresco', tipo: 'si_no', obligatorio: false },
+      { clave: 'parasitologico', label: 'Observación parasitológica', tipo: 'texto', obligatorio: false },
+    ],
   },
   {
     tipoEstudio: 'lcrcultivo',
@@ -58,6 +101,11 @@ const esquemas = [
     ],
     instrucciones: 'Procesar con urgencia. Examen directo con gram obligatorio. Incubar 37°C.',
     diasResolucionEsperados: 5,
+    camposCultivoPrimario: [
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: true },
+      { clave: 'fresco_hongos', label: 'Examen en fresco (hongos)', tipo: 'texto', obligatorio: false },
+      { clave: 'celulas', label: 'Recuento de células', tipo: 'texto', obligatorio: false },
+    ],
   },
   {
     tipoEstudio: 'microbiologico-general',
@@ -86,6 +134,11 @@ const esquemas = [
     ],
     instrucciones: 'Incubar a 28°C y 37°C. Lectura semanal hasta los 30 días.',
     diasResolucionEsperados: 30,
+    camposCultivoPrimario: [
+      { clave: 'fresco_koh', label: 'Fresco con KOH', tipo: 'texto', obligatorio: false },
+      { clave: 'calcofluor', label: 'Calcoflúor', tipo: 'texto', obligatorio: false },
+      { clave: 'gram_directo', label: 'Gram directo', tipo: 'texto', obligatorio: false },
+    ],
   },
   {
     tipoEstudio: 'anaerobios',

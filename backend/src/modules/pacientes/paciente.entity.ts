@@ -12,7 +12,7 @@ export class Paciente {
   @Column({ length: 100 })
   apellido: string;
 
-  @Column({ length: 20, unique: true })
+  @Column({ length: 20, unique: true, nullable: true })
   dni: string;
 
   @Column({ nullable: true })
